@@ -115,7 +115,7 @@
             	</constant>
             </setBody>
             <to id="_to1" uri="ref:jsonToPojo"/>
-            <log message="${body}"/>
+            <log id="_log1" message="${body}"/>
         </route>
     </camelContext>
 </beans>

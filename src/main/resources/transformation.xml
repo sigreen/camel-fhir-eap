@@ -7,8 +7,45 @@
         <class-a>fhir.Fhir</class-a>
         <class-b>org.example.camel_fhir_eap.FHIR</class-b>
         <field>
-            <a>status</a>
-            <b>status</b>
+            <a>contained[0].id</a>
+            <b>patientId</b>
         </field>
+		<field>
+            <a>component[0].code.coding[0].code</a>
+            <b>componentCode</b>
+        </field>
+		<field>
+            <a>component[0].code.coding[0].display</a>
+            <b>componentDisplay</b>
+        </field>
+        <field>
+            <a>component[0].valueQuantity.value</a>
+            <b>valueQtyValue</b>
+        </field>
+        <field>
+            <a>component[0].valueQuantity.unit</a>
+            <b>valueQtyUnit</b>
+        </field>
+    </mapping>
+    <mapping>
+        <class-a>fhir.Contained</class-a>
+        <class-b>org.example.camel_fhir_eap.FHIR</class-b>
+    </mapping>
+    <mapping>
+        <class-a>fhir.Coding__</class-a>
+        <class-b>org.example.camel_fhir_eap.FHIR</class-b>
+    </mapping>
+    <mapping>
+        <class-a>fhir.Component</class-a>
+        <class-b>org.example.camel_fhir_eap.FHIR</class-b>
+
+    </mapping>
+    <mapping>
+        <class-a>org.apache.camel.component.dozer.VariableMapper</class-a>
+        <class-b>org.example.camel_fhir_eap.FHIR</class-b>
+    </mapping>
+    <mapping>
+        <class-a>fhir.Identifier_</class-a>
+        <class-b>org.example.camel_fhir_eap.FHIR</class-b>
     </mapping>
 </mappings>
