@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="        http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd        http://camel.apache.org/schema/spring http://camel.apache.org/schema/spring/camel-spring.xsd">
+    <!--
+        Simple camel route which send every one minute a message on the console.
+    -->
+    <camelContext id="camelContext-73e3cc5e-c4b0-4f58-b047-5da344b259a9" xmlns="http://camel.apache.org/schema/spring">
+        <endpoint id="jsonToPojo" uri="dozer:jsonToPojo?sourceModel=fhir.Fhir&amp;targetModel=org.example.camel_fhir_eap.FHIR&amp;unmarshalId=fhirFhir&amp;mappingFile=transformation.xml"/>
+        <dataFormats>
+            <json id="fhirFhir" library="Jackson" unmarshalTypeName="fhir.Fhir"/>
+        </dataFormats>
+        <route id="timer-to-console">
+            <from id="_from1" uri="timer://foo?fixedRate=true&amp;period=10s"/>
+            <setBody id="_setBody1">
+                <constant>
+            		{
+  "resourceType": "Observation",
+  "contained": [
+    {
+    "resourceType": "Patient",
+    "id": "patient1",
+    "identifier": [
+        {
+        "system": "oid:facilityoid",
+          "value": "M000959930"
+        }
+    ],
+    "name": [
+        {
+        "family": [
+            "JARVI"
+        ],
+        "given": [
+            "Donavon"
+        ]
+        }
+    ],
+    "gender": "male",
+    "birthDate": "1955-11-21",
+    "address": [
+        {
+        "line": [
+            "S 5655 SHUMATE RUN",
+            ""
+        ],
+        "city": "Milton Freewater",
+        "state": "TN",
+        "postalCode": "97862"
+        }
+    ]
+    },
+    {
+    "resourceType": "Location",
+    "id": "location1"
+    }
+  ],
+  "identifier": [
+    {
+    "system": "http:\/\/fhir.hca.corpad.net\/labTestId",
+    "value": "L17847637"
+    }
+  ],
+  "status": "final",
+  "category": {
+    "coding": [
+    {
+        "system": "http:\/\/fhir.hca.corpad.net\/LabSubCategories",
+        "code": "Lab"
+    },
+    {
+        "system": "http:\/\/hl7.org\/fhir\/ValueSet\/observation-category",
+        "code": "laboratory"
+    }
+    ]
+  },
+  "code": {
+    "coding": [
+    {
+        "system": "http:\/\/fhir.hca.corpad.net\/MeditechLabTestCodes",
+        "code": "bah",
+        "display": "GLUCOSE (POINT OF CARE)"
+    }
+    ]
+  },
+  "subject": {
+    "reference": "#patient1"
+  },
+  "encounter": {
+    "reference": "#encounter1"
+  },
+  "issued": "2016-10-16T21:24:00-05:00",
+  "component": [
+    {
+      "code": {
+        "coding": [
+        {
+            "system": "http:\/\/fhir.hca.corpad.net\/MeditechLabResultCodes",
+            "code": "POCGLU",
+            "display": "GLUCOSE (POINT OF CARE)"
+        }
+        ]
+    },
+    "valueQuantity": {
+        "value": 153,
+        "unit": "mg\/dL"
+    },
+    "referenceRange": [
+        {
+        "text": "70-115"
+        }
+    ]
+    }
+  ]
+}
+            	</constant>
+            </setBody>
+            <to id="_to1" uri="ref:jsonToPojo"/>
+            <log message="${body}"/>
+        </route>
+    </camelContext>
+</beans>

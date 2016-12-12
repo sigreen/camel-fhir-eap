@@ -1,0 +1,99 @@
+{
+  "resourceType": "Observation",
+  "contained": [
+    {
+    "resourceType": "Patient",
+    "id": "patient1",
+    "identifier": [
+        {
+        "system": "oid:facilityoid",
+          "value": "M000959930"
+        }
+    ],
+    "name": [
+        {
+        "family": [
+            "JARVI"
+        ],
+        "given": [
+            "Donavon"
+        ]
+        }
+    ],
+    "gender": "male",
+    "birthDate": "1955-11-21",
+    "address": [
+        {
+        "line": [
+            "S 5655 SHUMATE RUN",
+            ""
+        ],
+        "city": "Milton Freewater",
+        "state": "TN",
+        "postalCode": "97862"
+        }
+    ]
+    },
+    {
+    "resourceType": "Location",
+    "id": "location1"
+    }
+  ],
+  "identifier": [
+    {
+    "system": "http:\/\/fhir.hca.corpad.net\/labTestId",
+    "value": "L17847637"
+    }
+  ],
+  "status": "final",
+  "category": {
+    "coding": [
+    {
+        "system": "http:\/\/fhir.hca.corpad.net\/LabSubCategories",
+        "code": "Lab"
+    },
+    {
+        "system": "http:\/\/hl7.org\/fhir\/ValueSet\/observation-category",
+        "code": "laboratory"
+    }
+    ]
+  },
+  "code": {
+    "coding": [
+    {
+        "system": "http:\/\/fhir.hca.corpad.net\/MeditechLabTestCodes",
+        "code": "bah",
+        "display": "GLUCOSE (POINT OF CARE)"
+    }
+    ]
+  },
+  "subject": {
+    "reference": "#patient1"
+  },
+  "encounter": {
+    "reference": "#encounter1"
+  },
+  "issued": "2016-10-16T21:24:00-05:00",
+  "component": [
+    {
+      "code": {
+        "coding": [
+        {
+            "system": "http:\/\/fhir.hca.corpad.net\/MeditechLabResultCodes",
+            "code": "POCGLU",
+            "display": "GLUCOSE (POINT OF CARE)"
+        }
+        ]
+    },
+    "valueQuantity": {
+        "value": 153,
+        "unit": "mg\/dL"
+    },
+    "referenceRange": [
+        {
+        "text": "70-115"
+        }
+    ]
+    }
+  ]
+}
